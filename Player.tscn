@@ -1,0 +1,59 @@
+[gd_scene load_steps=5 format=3 uid="uid://cbm2vw0rat82"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_qmj2y"]
+[ext_resource type="Texture2D" uid="uid://dhxv7em0b1mat" path="res://37142-circulartimer.png" id="2_q8tuw"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sk5ry"]
+height = 1.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_8odca"]
+height = 1.5
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+script = ExtResource("1_qmj2y")
+metadata/_edit_group_ = true
+
+[node name="head" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CapsuleShape3D_sk5ry")
+
+[node name="Camera3D" type="Camera3D" parent="head"]
+fov = 90.0
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+shape = SubResource("CylinderShape3D_8odca")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+target_position = Vector3(0, -0.3, 0)
+
+[node name="flight_energy" type="TextureProgressBar" parent="."]
+offset_left = 1.0
+offset_top = 975.0
+offset_right = 1025.0
+offset_bottom = 1999.0
+scale = Vector2(0.1, 0.1)
+step = 0.0
+value = 100.0
+fill_mode = 4
+texture_under = ExtResource("2_q8tuw")
+texture_progress = ExtResource("2_q8tuw")
+tint_under = Color(0, 0, 0, 1)
+tint_progress = Color(0.886275, 0.0941176, 0.0352941, 1)
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(960, 540)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1.5
+offset_top = -1.5
+offset_right = 1.5
+offset_bottom = 1.5
+grow_horizontal = 2
+grow_vertical = 2

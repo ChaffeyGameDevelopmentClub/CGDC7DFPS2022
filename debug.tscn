@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://jfg5qeu2gpw4"]
+
+[ext_resource type="Texture2D" uid="uid://2x1lpuyj7rt3" path="res://assets/textures/Prototype/Orange/texture_01.png" id="1_qeolt"]
+[ext_resource type="PackedScene" uid="uid://cbm2vw0rat82" path="res://Player.tscn" id="2_fwclv"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0nqdf"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_yddxr"]
+sky_material = SubResource("ProceduralSkyMaterial_0nqdf")
+
+[sub_resource type="Environment" id="Environment_pppqd"]
+background_mode = 2
+sky = SubResource("Sky_yddxr")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_tls2k"]
+size = Vector2(100, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hyl0i"]
+albedo_texture = ExtResource("1_qeolt")
+heightmap_scale = 16.0
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_pppqd")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+use_collision = true
+mesh = SubResource("PlaneMesh_tls2k")
+material = SubResource("StandardMaterial3D_hyl0i")
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("2_fwclv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.98733, 0)
